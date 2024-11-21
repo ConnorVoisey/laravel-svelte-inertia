@@ -1,12 +1,9 @@
 <script lang="ts">
     import Checkbox from '@/Components/Checkbox.svelte';
-    import GuestLayout from '@/Layouts/GuestLayout.svelte';
-    import InputError from '@/Components/InputError.svelte';
-    import InputLabel from '@/Components/InputLabel.svelte';
-    import PrimaryButton from '@/Components/PrimaryButton.svelte';
-    import TextInput from '@/Components/TextInput.svelte';
+    import Input from '@/Components/Input.svelte';
     import { inertia, useForm } from '@inertiajs/svelte';
     import { route } from 'momentum-trail';
+    import LoginLayout from '@/Layouts/LoginLayout.svelte';
 
     let {
         canResetPassword,
@@ -35,49 +32,40 @@
     <title>Log in</title>
 </svelte:head>
 
-<GuestLayout>
+<LoginLayout>
     {#if status}
-        <div class="mb-4 text-sm font-medium text-green-600">
+        <div class="text-green-600 mb-4 text-sm font-medium">
             {status}
         </div>
     {/if}
 
-    <form onsubmit={submit}>
-        <div>
-            <InputLabel for="email" value="Email" />
+    <form onsubmit={submit} class="flex flex-col gap-4">
+        <h1 class="title">Login</h1>
+        <Input
+            type="email"
+            class="mt-1 block w-full"
+            bind:value={$form.email}
+            required
+            autofocus
+            autocomplete="username"
+            label="Email"
+            error={$form.errors.email}
+        />
+        <Input
+            label="Password"
+            id="password"
+            type="password"
+            class="mt-1 block w-full"
+            bind:value={$form.password}
+            required
+            autocomplete="current-password"
+            error={$form.errors.password}
+        />
 
-            <TextInput
-                id="email"
-                type="email"
-                class="mt-1 block w-full"
-                bind:value={$form.email}
-                required
-                autofocus
-                autocomplete="username"
-            />
-
-            <InputError class="mt-2" message={$form.errors.email} />
-        </div>
-
-        <div class="mt-4">
-            <InputLabel for="password" value="Password" />
-
-            <TextInput
-                id="password"
-                type="password"
-                class="mt-1 block w-full"
-                bind:value={$form.password}
-                required
-                autocomplete="current-password"
-            />
-
-            <InputError class="mt-2" message={$form.errors.password} />
-        </div>
-
-        <div class="mt-4 block">
+        <div class="block">
             <label class="flex items-center">
                 <Checkbox name="remember" bind:checked={$form.remember} />
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">Remember me</span>
+                <span class="text-gray-600 dark:text-gray-400 ms-2 text-sm">Remember me</span>
             </label>
         </div>
 
@@ -85,22 +73,20 @@
             <a
                 href="/register"
                 use:inertia
-                class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
+                class="text-gray-600 hover:text-gray-900 focus:ring-indigo-500 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800 rounded-md text-sm underline focus:outline-none focus:ring-2 focus:ring-offset-2"
                 >Register</a
             >
             {#if canResetPassword}
                 <a
                     use:inertia
                     href={route('password.request')}
-                    class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
+                    class="text-gray-600 hover:text-gray-900 focus:ring-indigo-500 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800 rounded-md text-sm underline focus:outline-none focus:ring-2 focus:ring-offset-2"
                 >
                     Forgot your password?
                 </a>
             {/if}
 
-            <PrimaryButton class="ms-4 {$form.processing && 'opacity-25'}" disabled={$form.processing}
-                >Log in</PrimaryButton
-            >
+            <button class="ms-4 {$form.processing && 'opacity-25'}" disabled={$form.processing}>Log in</button>
         </div>
     </form>
-</GuestLayout>
+</LoginLayout>

@@ -76,7 +76,7 @@
                 leave="transition ease-in-out"
                 leaveFrom="opacity-0"
             >
-                <p class="text-sm text-gray-600 transition ease-in-out dark:text-gray-400">Saved.</p>
+                <p class="text-gray-600 dark:text-gray-400 text-sm transition ease-in-out">Saved.</p>
             </Transition>
         </div>
     </form>

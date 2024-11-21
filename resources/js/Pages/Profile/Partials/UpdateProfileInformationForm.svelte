@@ -29,9 +29,9 @@
 
 <section>
     <header>
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">Profile Information</h2>
+        <h2 class="text-gray-900 dark:text-gray-100 text-lg font-medium">Profile Information</h2>
 
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+        <p class="text-gray-600 dark:text-gray-400 mt-1 text-sm">
             Update your account's profile information and email address.
         </p>
     </header>
@@ -69,18 +69,18 @@
         </div>
 
         {#if mustVerifyEmail && user.email_verified_at === null}
-            <p class="mt-2 text-sm text-gray-800 dark:text-gray-200">
+            <p class="text-gray-800 dark:text-gray-200 mt-2 text-sm">
                 Your email address is unverified.
                 <button
                     use:inertia={{ href: route('verification.send'), method: 'post' }}
-                    class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
+                    class="text-gray-600 hover:text-gray-900 focus:ring-indigo-500 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800 rounded-md text-sm underline focus:outline-none focus:ring-2 focus:ring-offset-2"
                 >
                     Click here to re-send the verification email.
                 </button>
             </p>
 
             {#if status === 'verification-link-sent'}
-                <div class="mt-2 text-sm font-medium text-green-600 dark:text-green-400">
+                <div class="text-green-600 dark:text-green-400 mt-2 text-sm font-medium">
                     A new verification link has been sent to your email address.
                 </div>
             {/if}
@@ -96,7 +96,7 @@
                 leave="transition ease-in-out"
                 leaveFrom="opacity-0"
             >
-                <p class="text-sm text-gray-600 transition ease-in-out dark:text-gray-400">Saved.</p>
+                <p class="text-gray-600 dark:text-gray-400 text-sm transition ease-in-out">Saved.</p>
             </Transition>
         </div>
     </form>

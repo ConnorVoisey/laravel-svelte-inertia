@@ -2,11 +2,10 @@ list:
     @just --list
 
 install:
-    @just install_ubuntu
-
-install_ubuntu:
     npm i
     composer install
+
+install_ext_ubuntu:
     wget https://github.com/watchexec/watchexec/releases/download/v2.2.0/watchexec-2.2.0-aarch64-unknown-linux-gnu.deb
     sudo dpkg -i watchexec-2.2.0-x86_64-unknown-linux-gnu.deb
     sudo apt install -f jq

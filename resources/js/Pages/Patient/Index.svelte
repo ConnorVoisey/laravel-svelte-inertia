@@ -15,13 +15,13 @@
 
 <AuthenticatedLayout>
     {#snippet header()}
-        <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">Patient</h2>
+        <h2 class="text-gray-800 dark:text-gray-200 text-xl font-semibold leading-tight">Patient</h2>
     {/snippet}
 
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
-                <div class="p-6 text-gray-900 dark:text-gray-100">Patients</div>
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="text-gray-900 dark:text-gray-100 p-6">Patients</div>
                 <ul class="flex flex-col gap-4 p-6" use:autoAnimate>
                     {#each patients as patient}
                         <li class="text-gray-100">
@@ -37,7 +37,7 @@
 
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="overflow-hidden bg-white p-6 shadow-sm sm:rounded-lg dark:bg-gray-800">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden p-6 shadow-sm sm:rounded-lg">
                 <UpdatePatientForm />
             </div>
         </div>

@@ -63,7 +63,7 @@
             >
                 <!-- svelte-ignore a11y_no_static_element_interactions -->
                 <div class="fixed inset-0 transform transition-all" onclick={close}>
-                    <div class="absolute inset-0 bg-gray-500 opacity-75 dark:bg-gray-900"></div>
+                    <div class="bg-gray-500 dark:bg-gray-900 absolute inset-0 opacity-75"></div>
                 </div>
             </Transition>
 
@@ -76,7 +76,7 @@
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
                 <div
-                    class="mb-6 transform overflow-hidden rounded-lg bg-white shadow-xl transition-all sm:mx-auto sm:w-full dark:bg-gray-800 {maxWidthClass}"
+                    class="bg-white dark:bg-gray-800 mb-6 transform overflow-hidden rounded-lg shadow-xl transition-all sm:mx-auto sm:w-full {maxWidthClass}"
                 >
                     {@render children()}
                 </div>

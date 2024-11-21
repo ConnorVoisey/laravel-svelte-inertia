@@ -14,8 +14,8 @@
 </script>
 
 <div>
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-        <nav class="border-b border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800">
+    <div class="bg-gray-100 dark:bg-gray-900 min-h-screen">
+        <nav class="border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800 border-b">
             <!-- Primary Navigation Menu -->
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="flex h-16 justify-between">
@@ -24,7 +24,7 @@
                         <div class="flex shrink-0 items-center">
                             <a use:inertia href={route('dashboard')}>
                                 <ApplicationLogo
-                                    class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"
+                                    class="fill-current text-gray-800 dark:text-gray-200 block h-9 w-auto"
                                 />
                             </a>
                         </div>
@@ -43,7 +43,7 @@
                                     <span class="inline-flex rounded-md">
                                         <button
                                             type="button"
-                                            class="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-400 dark:hover:text-gray-300"
+                                            class="border-transparent bg-white text-gray-500 hover:text-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:text-gray-300 inline-flex items-center rounded-md border px-3 py-2 text-sm font-medium leading-4 transition duration-150 ease-in-out focus:outline-none"
                                         >
                                             {$page.props.auth.user.name}
 
@@ -76,7 +76,7 @@
                     <div class="-me-2 flex items-center sm:hidden">
                         <button
                             onclick={() => (showingNavigationDropdown = !showingNavigationDropdown)}
-                            class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none dark:text-gray-500 dark:hover:bg-gray-900 dark:hover:text-gray-400 dark:focus:bg-gray-900 dark:focus:text-gray-400"
+                            class="text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 dark:text-gray-500 dark:hover:bg-gray-900 dark:hover:text-gray-400 dark:focus:bg-gray-900 dark:focus:text-gray-400 inline-flex items-center justify-center rounded-md p-2 transition duration-150 ease-in-out focus:outline-none"
                         >
                             <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                 <path
@@ -110,12 +110,12 @@
                 </div>
 
                 <!-- Responsive Settings Options -->
-                <div class="border-t border-gray-200 pb-1 pt-4 dark:border-gray-600">
+                <div class="border-gray-200 dark:border-gray-600 border-t pb-1 pt-4">
                     <div class="px-4">
-                        <div class="text-base font-medium text-gray-800 dark:text-gray-200">
+                        <div class="text-gray-800 dark:text-gray-200 text-base font-medium">
                             {$page.props.auth.user.name}
                         </div>
-                        <div class="text-sm font-medium text-gray-500">
+                        <div class="text-gray-500 text-sm font-medium">
                             {$page.props.auth.user.email}
                         </div>
                     </div>
@@ -130,7 +130,7 @@
 
         <!-- Page Heading -->
         {#if header}
-            <header class="bg-white shadow dark:bg-gray-800">
+            <header class="bg-white dark:bg-gray-800 shadow">
                 <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                     {@render header()}
                 </div>

@@ -24,4 +24,13 @@ export default defineConfig({
         ]),
         svelte(),
     ],
+    css: {
+        preprocessorOptions: {
+            scss: {
+                additionalData: `
+             @use 'resources/css/_variables.scss' as *;
+        `,
+            },
+        },
+    },
 });

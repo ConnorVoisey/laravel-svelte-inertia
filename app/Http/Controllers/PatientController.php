@@ -12,8 +12,9 @@ class PatientController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        Log::info('index patient', ['userId' => $request->user()?->id]);
         return Inertia::render('Patient/Index', [
             'patients' => Patient::get(),
         ]);
