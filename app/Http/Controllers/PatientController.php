@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Patient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 class PatientController extends Controller
@@ -36,6 +37,7 @@ class PatientController extends Controller
             'last_name' => ['string', 'required', 'max:5'],
             'email' => ['string', 'required'],
         ]);
+        Log::debug('store patient', ['userId' => $request->user()?->id, 'validatedBody' => $validated]);
         Patient::create($validated);
 
         return redirect(route('patient.index', absolute: false));
