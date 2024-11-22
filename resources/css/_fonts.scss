@@ -2,35 +2,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Space+Grotesk:wght@500&display=swap');
 
 :root {
-	font-family: Inter, Arial, Helvetica, sans-serif;
+    font-family: Inter, Arial, Helvetica, sans-serif;
 }
 
 @mixin title($color) {
-	color: $color;
-	font-family: Space Grotesk;
-	font-weight: 500;
-	font-size: 36px;
-	@media (max-width: 700px) {
-		& {
-			font-size: 28px;
-		}
-	}
+    color: $color;
+    font-family: Space Grotesk;
+    font-weight: 500;
+    font-size: 36px;
+    @media (max-width: 700px) {
+        & {
+            font-size: 28px;
+        }
+    }
 }
 
 @mixin subtitle($color) {
-	color: $color;
-	font-family: Space Grotesk;
-	font-weight: 300;
-	font-size: 1.2rem;
-	@media (max-width: 700px) {
-		& {
-			font-size: 28px;
-		}
-	}
+    color: $color;
+    font-family: Space Grotesk;
+    font-weight: 300;
+    font-size: 1.2rem;
+    @media (max-width: 700px) {
+        & {
+            font-size: 28px;
+        }
+    }
 }
 
 .title {
-	@include title(on-surface(0));
+    @include title(on-surface(0));
 }
 
 .subtitle {
@@ -38,7 +38,7 @@
 }
 
 .title-primary {
-	@include title(primary(5));
+    @include title(primary(5));
 }
 
 .subtitle-primary {
@@ -46,7 +46,7 @@
 }
 
 .title-on-primary {
-	@include title(on-primary(0));
+    @include title(on-primary(0));
 }
 
 .subtitle-on-primary {

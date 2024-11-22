@@ -44,7 +44,7 @@
     <form onsubmit={updatePassword} class="mt-6 space-y-6">
         <div>
             <Input
-            label="Current Password"
+                label="Current Password"
                 bind:this={currentPasswordInput}
                 bind:value={$form.current_password}
                 type="password"

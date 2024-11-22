@@ -3,7 +3,6 @@
     import Input from '@/Components/Input.svelte';
     import { inertia, useForm } from '@inertiajs/svelte';
     import { route } from 'momentum-trail';
-    import LoginLayout from '@/Layouts/LoginLayout.svelte';
 
     let {
         canResetPassword,
@@ -32,61 +31,59 @@
     <title>Log in</title>
 </svelte:head>
 
-<LoginLayout>
-    {#if status}
-        <div class="text-green-600 mb-4 text-sm font-medium">
-            {status}
-        </div>
-    {/if}
+{#if status}
+    <div class="text-green-600 mb-4 text-sm font-medium">
+        {status}
+    </div>
+{/if}
 
-    <form onsubmit={submit} class="flex flex-col gap-4">
-        <h1 class="title">Login</h1>
-        <Input
-            type="email"
-            class="mt-1 block w-full"
-            bind:value={$form.email}
-            required
-            autofocus
-            autocomplete="username"
-            label="Email"
-            error={$form.errors.email}
-        />
-        <Input
-            label="Password"
-            id="password"
-            type="password"
-            class="mt-1 block w-full"
-            bind:value={$form.password}
-            required
-            autocomplete="current-password"
-            error={$form.errors.password}
-        />
+<form onsubmit={submit} class="flex flex-col gap-4">
+    <h1 class="title">Login</h1>
+    <Input
+        type="email"
+        class="mt-1 block w-full"
+        bind:value={$form.email}
+        required
+        autofocus
+        autocomplete="username"
+        label="Email"
+        error={$form.errors.email}
+    />
+    <Input
+        label="Password"
+        id="password"
+        type="password"
+        class="mt-1 block w-full"
+        bind:value={$form.password}
+        required
+        autocomplete="current-password"
+        error={$form.errors.password}
+    />
 
-        <div class="block">
-            <label class="flex items-center">
-                <Checkbox name="remember" bind:checked={$form.remember} />
-                <span class="text-gray-600 dark:text-gray-400 ms-2 text-sm">Remember me</span>
-            </label>
-        </div>
+    <div class="block">
+        <label class="flex items-center">
+            <Checkbox name="remember" bind:checked={$form.remember} />
+            <span class="text-gray-600 dark:text-gray-400 ms-2 text-sm">Remember me</span>
+        </label>
+    </div>
 
-        <div class="mt-4 flex items-center justify-between">
+    <div class="mt-4 flex items-center justify-between">
+        <a
+            href="/register"
+            use:inertia
+            class="text-gray-600 hover:text-gray-900 focus:ring-indigo-500 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800 rounded-md text-sm underline focus:outline-none focus:ring-2 focus:ring-offset-2"
+            >Register</a
+        >
+        {#if canResetPassword}
             <a
-                href="/register"
                 use:inertia
+                href={route('password.request')}
                 class="text-gray-600 hover:text-gray-900 focus:ring-indigo-500 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800 rounded-md text-sm underline focus:outline-none focus:ring-2 focus:ring-offset-2"
-                >Register</a
             >
-            {#if canResetPassword}
-                <a
-                    use:inertia
-                    href={route('password.request')}
-                    class="text-gray-600 hover:text-gray-900 focus:ring-indigo-500 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800 rounded-md text-sm underline focus:outline-none focus:ring-2 focus:ring-offset-2"
-                >
-                    Forgot your password?
-                </a>
-            {/if}
+                Forgot your password?
+            </a>
+        {/if}
 
-            <button class="ms-4 {$form.processing && 'opacity-25'}" disabled={$form.processing}>Log in</button>
-        </div>
-    </form>
-</LoginLayout>
+        <button class="ms-4 {$form.processing && 'opacity-25'}" disabled={$form.processing}>Log in</button>
+    </div>
+</form>

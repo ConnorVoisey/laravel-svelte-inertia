@@ -65,6 +65,7 @@
 
                                 {#snippet content()}
                                     <DropdownLink href={route('profile.edit')}>Profile</DropdownLink>
+                                    <DropdownLink href={route('patient.index')}>Patients</DropdownLink>
                                     <DropdownLink href={route('logout')} method="post" as="button">Log Out</DropdownLink
                                     >
                                 {/snippet}
@@ -122,6 +123,7 @@
 
                     <div class="mt-3 space-y-1">
                         <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('patient.index')}>Patients</ResponsiveNavLink>
                         <ResponsiveNavLink href={route('logout')} method="post" as="button">Log Out</ResponsiveNavLink>
                     </div>
                 </div>
@@ -133,5 +135,40 @@
             {@render children()}
         </main>
     </div>
+
+    <div class="line bg-on-surface-0"></div>
 </div>
 
+<style lang="scss">
+    .line {
+        position: absolute;
+        top: 10rem;
+        height: 2px;
+        width: 100%;
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translateY(50%);
+            height: 10px;
+            width: 10px;
+            border-radius: 50%;
+            background: primary(5);
+            box-shadow: -0.5rem 0 1.5rem 0.5rem #fff;
+            animation-duration: 3s;
+            animation-name: move;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+        @keyframes move {
+            from {
+                left: 0%;
+            }
+
+            to {
+                left: 100%;
+            }
+        }
+    }
+</style>
