@@ -1,9 +1,6 @@
 <script lang="ts">
     import GuestLayout from '@/Layouts/GuestLayout.svelte';
-    import InputError from '@/Components/InputError.svelte';
-    import InputLabel from '@/Components/InputLabel.svelte';
-    import PrimaryButton from '@/Components/PrimaryButton.svelte';
-    import TextInput from '@/Components/TextInput.svelte';
+    import Input from '@/Components/Input.svelte';
     import { route } from 'momentum-trail';
     import { useForm } from '@inertiajs/svelte';
 
@@ -32,55 +29,44 @@
 <GuestLayout>
     <form onsubmit={submit}>
         <div>
-            <InputLabel for="email" value="Email" />
-
-            <TextInput
-                id="email"
+            <Input
+                label="Email"
                 type="email"
                 class="mt-1 block w-full"
                 bind:value={$form.email}
                 required
                 autofocus
                 autocomplete="username"
+                error={$form.errors.email}
             />
-
-            <InputError class="mt-2" message={$form.errors.email} />
         </div>
 
         <div class="mt-4">
-            <InputLabel for="password" value="Password" />
-
-            <TextInput
-                id="password"
+            <Input
+                label="Password"
                 type="password"
                 class="mt-1 block w-full"
                 bind:value={$form.password}
                 required
                 autocomplete="new-password"
+                error={$form.errors.password}
             />
-
-            <InputError class="mt-2" message={$form.errors.password} />
         </div>
 
         <div class="mt-4">
-            <InputLabel for="password_confirmation" value="Confirm Password" />
-
-            <TextInput
-                id="password_confirmation"
+            <Input
+                label="Confirm Password"
                 type="password"
                 class="mt-1 block w-full"
                 bind:value={$form.password_confirmation}
                 required
                 autocomplete="new-password"
+                error={$form.errors.password_confirmation}
             />
-
-            <InputError class="mt-2" message={$form.errors.password_confirmation} />
         </div>
 
         <div class="mt-4 flex items-center justify-end">
-            <PrimaryButton class={$form.processing && 'opacity-25'} disabled={$form.processing}
-                >Reset Password</PrimaryButton
-            >
+            <button class={$form.processing && 'opacity-25'} disabled={$form.processing}>Reset Password</button>
         </div>
     </form>
 </GuestLayout>

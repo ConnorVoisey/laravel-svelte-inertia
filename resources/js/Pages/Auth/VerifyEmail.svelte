@@ -1,7 +1,6 @@
 <script lang="ts">
     import { inertia, useForm } from '@inertiajs/svelte';
     import GuestLayout from '@/Layouts/GuestLayout.svelte';
-    import PrimaryButton from '@/Components/PrimaryButton.svelte';
     import { route } from 'momentum-trail';
 
     let { status }: { status?: string } = $props();
@@ -34,9 +33,9 @@
 
     <form onsubmit={submit}>
         <div class="mt-4 flex items-center justify-between">
-            <PrimaryButton class={$form.processing && 'opacity-25'} disabled={$form.processing}>
+            <button class={$form.processing && 'opacity-25'} disabled={$form.processing}>
                 Resend Verification Email
-            </PrimaryButton>
+            </button>
 
             <button
                 use:inertia={{ href: route('logout'), method: 'post' }}

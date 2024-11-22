@@ -1,14 +1,11 @@
 <script lang="ts">
     import { useForm } from '@inertiajs/svelte';
-    import InputError from '@/Components/InputError.svelte';
-    import InputLabel from '@/Components/InputLabel.svelte';
-    import PrimaryButton from '@/Components/PrimaryButton.svelte';
-    import TextInput from '@/Components/TextInput.svelte';
+    import Input from '@/Components/Input.svelte';
     import Transition from 'svelte-transition';
     import { route } from 'momentum-trail';
 
-    let passwordInput: TextInput;
-    let currentPasswordInput: TextInput;
+    let passwordInput: Input;
+    let currentPasswordInput: Input;
 
     const form = useForm({
         current_password: '',
@@ -46,51 +43,42 @@
 
     <form onsubmit={updatePassword} class="mt-6 space-y-6">
         <div>
-            <InputLabel for="current_password" value="Current Password" />
-
-            <TextInput
-                id="current_password"
+            <Input
+            label="Current Password"
                 bind:this={currentPasswordInput}
                 bind:value={$form.current_password}
                 type="password"
                 class="mt-1 block w-full"
                 autocomplete="current-password"
+                error={$form.errors.current_password}
             />
-
-            <InputError message={$form.errors.current_password} class="mt-2" />
         </div>
 
         <div>
-            <InputLabel for="password" value="New Password" />
-
-            <TextInput
-                id="password"
+            <Input
+                label="New Password"
                 bind:this={passwordInput}
                 bind:value={$form.password}
                 type="password"
                 class="mt-1 block w-full"
                 autocomplete="new-password"
+                error={$form.errors.password}
             />
-
-            <InputError message={$form.errors.password} class="mt-2" />
         </div>
 
         <div>
-            <InputLabel for="password_confirmation" value="Confirm Password" />
-
-            <TextInput
-                id="password_confirmation"
+            <Input
+                label="Confirm Password"
                 bind:value={$form.password_confirmation}
                 type="password"
                 class="mt-1 block w-full"
                 autocomplete="new-password"
+                error={$form.errors.password_confirmation}
             />
-
-            <InputError message={$form.errors.password_confirmation} class="mt-2" />
         </div>
 
         <div class="flex items-center gap-4">
-            <PrimaryButton disabled={$form.processing}>Save</PrimaryButton>
+            <button disabled={$form.processing}>Save</button>
 
             <Transition
                 show={$form.recentlySuccessful}

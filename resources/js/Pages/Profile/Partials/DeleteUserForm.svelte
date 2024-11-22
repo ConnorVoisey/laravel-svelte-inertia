@@ -1,15 +1,11 @@
 <script lang="ts">
     import { useForm } from '@inertiajs/svelte';
-    import DangerButton from '@/Components/DangerButton.svelte';
-    import InputError from '@/Components/InputError.svelte';
-    import InputLabel from '@/Components/InputLabel.svelte';
     import Modal from '@/Components/Modal.svelte';
-    import SecondaryButton from '@/Components/SecondaryButton.svelte';
-    import TextInput from '@/Components/TextInput.svelte';
+    import Input from '@/Components/Input.svelte';
     import { route } from 'momentum-trail';
 
     let confirmingUserDeletion = $state(false);
-    let passwordInput: TextInput;
+    let passwordInput: Input;
 
     const form = useForm({
         password: '',
@@ -45,7 +41,7 @@
         </p>
     </header>
 
-    <DangerButton onclick={confirmUserDeletion}>Delete Account</DangerButton>
+    <button onclick={confirmUserDeletion}>Delete Account</button>
 
     <Modal show={confirmingUserDeletion} onclose={closeModal}>
         <div class="p-6">
@@ -59,31 +55,28 @@
             </p>
 
             <div class="mt-6">
-                <InputLabel for="password" value="Password" class="sr-only" />
-
-                <TextInput
-                    id="password"
+                <Input
+                    label="Password"
                     bind:this={passwordInput}
                     bind:value={$form.password}
                     type="password"
                     class="mt-1 block w-3/4"
                     placeholder="Password"
                     onkeyup={(e: KeyboardEvent) => e.key === 'Enter' && deleteUser()}
+                    error={$form.errors.password}
                 />
-
-                <InputError message={$form.errors.password} class="mt-2" />
             </div>
 
             <div class="mt-6 flex justify-end">
-                <SecondaryButton onclick={closeModal}>Cancel</SecondaryButton>
+                <button onclick={closeModal}>Cancel</button>
 
-                <DangerButton
+                <button
                     class="ms-3 {$form.processing && 'opacity-25'}"
                     disabled={$form.processing}
                     onclick={deleteUser}
                 >
                     Delete Account
-                </DangerButton>
+                </button>
             </div>
         </div>
     </Modal>

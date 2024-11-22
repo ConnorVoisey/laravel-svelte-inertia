@@ -1,9 +1,6 @@
 <script lang="ts">
     import { inertia, page, useForm } from '@inertiajs/svelte';
-    import InputError from '@/Components/InputError.svelte';
-    import InputLabel from '@/Components/InputLabel.svelte';
-    import PrimaryButton from '@/Components/PrimaryButton.svelte';
-    import TextInput from '@/Components/TextInput.svelte';
+    import Input from '@/Components/Input.svelte';
     import Transition from 'svelte-transition';
     import { route } from 'momentum-trail';
 
@@ -38,34 +35,28 @@
 
     <form onsubmit={submit} class="mt-6 space-y-6">
         <div>
-            <InputLabel for="name" value="Name" />
-
-            <TextInput
-                id="name"
+            <Input
+                label="Name"
                 type="text"
                 class="mt-1 block w-full"
                 bind:value={$form.name}
                 required
                 autofocus
                 autocomplete="name"
+                error={$form.errors.name}
             />
-
-            <InputError class="mt-2" message={$form.errors.name} />
         </div>
 
         <div>
-            <InputLabel for="email" value="Email" />
-
-            <TextInput
-                id="email"
+            <Input
+                label="Email"
                 type="email"
                 class="mt-1 block w-full"
                 bind:value={$form.email}
                 required
                 autocomplete="username"
+                error={$form.errors.email}
             />
-
-            <InputError class="mt-2" message={$form.errors.email} />
         </div>
 
         {#if mustVerifyEmail && user.email_verified_at === null}
@@ -87,7 +78,7 @@
         {/if}
 
         <div class="flex items-center gap-4">
-            <PrimaryButton disabled={$form.processing}>Save</PrimaryButton>
+            <button disabled={$form.processing}>Save</button>
 
             <Transition
                 show={$form.recentlySuccessful}

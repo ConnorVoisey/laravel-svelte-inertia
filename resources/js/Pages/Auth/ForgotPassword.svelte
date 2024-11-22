@@ -1,9 +1,6 @@
 <script lang="ts">
     import GuestLayout from '@/Layouts/GuestLayout.svelte';
-    import InputError from '@/Components/InputError.svelte';
-    import InputLabel from '@/Components/InputLabel.svelte';
-    import PrimaryButton from '@/Components/PrimaryButton.svelte';
-    import TextInput from '@/Components/TextInput.svelte';
+    import Input from '@/Components/Input.svelte';
     import { route } from 'momentum-trail';
     import { useForm } from '@inertiajs/svelte';
 
@@ -38,25 +35,22 @@
 
     <form onsubmit={submit}>
         <div>
-            <InputLabel for="email" value="Email" />
-
-            <TextInput
-                id="email"
+            <Input
+                label="Email"
                 type="email"
                 class="mt-1 block w-full"
                 bind:value={$form.email}
                 required
                 autofocus
                 autocomplete="username"
+                error={$form.errors.email}
             />
-
-            <InputError class="mt-2" message={$form.errors.email} />
         </div>
 
         <div class="mt-4 flex items-center justify-end">
-            <PrimaryButton class={$form.processing && 'opacity-25'} disabled={$form.processing}>
+            <button class={$form.processing && 'opacity-25'} disabled={$form.processing}>
                 Email Password Reset Link
-            </PrimaryButton>
+            </button>
         </div>
     </form>
 </GuestLayout>
