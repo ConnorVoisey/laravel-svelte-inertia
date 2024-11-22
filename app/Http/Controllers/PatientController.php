@@ -38,7 +38,7 @@ class PatientController extends Controller
             'last_name' => ['string', 'required', 'max:5'],
             'email' => ['string', 'required'],
         ]);
-        Log::debug('store patient', ['userId' => $request->user()?->id, 'validatedBody' => $validated]);
+        Log::debug('store patient', ['userId' => $request->user()?->id, 'validatedBody' => $validated, 'all' => $request->all()]);
         Patient::create($validated);
 
         return redirect(route('patient.index', absolute: false));

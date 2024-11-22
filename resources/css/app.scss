@@ -1,3 +1,8 @@
+@use './variables' as *;
+@use './_fonts';
+@use './components';
+@use './nav';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -9,7 +14,7 @@
 
 :root {
     scroll-behavior: smooth;
-    overflow: hidden;
+    overflow: auto;
 }
 
 body {
@@ -25,6 +30,10 @@ hr {
         height: inherit;
         width: 2px;
     }
+}
+
+.content-width {
+    @include content-width;
 }
 
 :root,

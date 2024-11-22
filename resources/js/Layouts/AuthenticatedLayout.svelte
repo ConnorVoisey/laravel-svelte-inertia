@@ -8,12 +8,12 @@
     import NavLink from '@/Components/NavLink.svelte';
     import ResponsiveNavLink from '@/Components/ResponsiveNavLink.svelte';
 
-    let { children, header }: { children: Snippet; header: Snippet } = $props();
+    let { children }: { children: Snippet } = $props();
 
     let showingNavigationDropdown = $state(false);
 </script>
 
-<div>
+<div class="wrapper">
     <div class="bg-gray-100 dark:bg-gray-900 min-h-screen">
         <nav class="border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800 border-b">
             <!-- Primary Navigation Menu -->
@@ -128,18 +128,10 @@
             </div>
         </nav>
 
-        <!-- Page Heading -->
-        {#if header}
-            <header class="bg-white dark:bg-gray-800 shadow">
-                <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                    {@render header()}
-                </div>
-            </header>
-        {/if}
-
         <!-- Page Content -->
-        <main>
+        <main class="content-width">
             {@render children()}
         </main>
     </div>
 </div>
+

@@ -1,9 +1,6 @@
 <script lang="ts">
     import { useForm } from '@inertiajs/svelte';
-    import InputError from '@/Components/InputError.svelte';
-    import InputLabel from '@/Components/InputLabel.svelte';
-    import PrimaryButton from '@/Components/PrimaryButton.svelte';
-    import TextInput from '@/Components/TextInput.svelte';
+    import Input from '@/Components/Input.svelte';
     import Transition from 'svelte-transition';
     import type { PatientsInitializer, PatientsMutator } from '../../../schemas/public/Patients';
     import { route } from 'momentum-trail';
@@ -15,8 +12,17 @@
         first_name,
         last_name,
         email,
+        arr: [1, 2, 3],
+        obj: {
+            foo: {
+                nested: true,
+            },
+            bar: [1, 2, 3],
+        },
+        avatar: null,
     };
     const form = useForm(formBegining);
+    let file: File;
 
     function onsubmit(e: SubmitEvent) {
         e.preventDefault();
@@ -39,35 +45,38 @@
 
 <section>
     <form {onsubmit} class="space-y-6">
-        <div>
-            <InputLabel for="first_name" value="First Name" />
+        <input type="file" oninput={(e) => ($form.avatar = e.target.files[0])} />
+        {#if $form.progress}
+            <progress value={$form.progress.percentage} max="100">
+                {$form.progress.percentage}%
+            </progress>
+        {/if}
 
-            <TextInput id="first_name" bind:value={$form.first_name} type="text" class="mt-1 block w-full" />
-
-            <InputError message={$form.errors.first_name} class="mt-2" />
-        </div>
-        <div>
-            <InputLabel for="last_name" value="Last Name" />
-            <TextInput id="last_name" bind:value={$form.last_name} type="text" class="mt-1 block w-full" />
-            <InputError message={$form.errors.last_name} class="mt-2" />
-        </div>
-
-        <div>
-            <InputLabel for="email" value="Email" />
-
-            <TextInput
-                id="email"
-                bind:value={$form.email}
-                type="email"
-                class="mt-1 block w-full"
-                autocomplete="email"
-            />
-
-            <InputError message={$form.errors.password} class="mt-2" />
-        </div>
+        <Input
+            label="First Name"
+            error={$form.errors.first_name}
+            bind:value={$form.first_name}
+            type="text"
+            class="mt-1 block w-full"
+        />
+        <Input
+            label="Last Name"
+            error={$form.errors.last_name}
+            bind:value={$form.last_name}
+            type="text"
+            class="mt-1 block w-full"
+        />
+        <Input
+            label="Email"
+            error={$form.errors.email}
+            bind:value={$form.email}
+            type="email"
+            class="mt-1 block w-full"
+            autocomplete="email"
+        />
 
         <div class="flex items-center gap-4">
-            <PrimaryButton disabled={$form.processing}>Save</PrimaryButton>
+            <button disabled={$form.processing}>Save</button>
 
             <Transition
                 show={$form.recentlySuccessful}
