@@ -1,4 +1,4 @@
-@mixin content-width($width: 1300px) {
+@mixin content-width($width: 1000px) {
     max-width: $width;
     margin: auto;
     width: 100%;

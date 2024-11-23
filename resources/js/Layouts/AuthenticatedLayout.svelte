@@ -7,6 +7,7 @@
     import DropdownLink from '@/Components/DropdownLink.svelte';
     import NavLink from '@/Components/NavLink.svelte';
     import ResponsiveNavLink from '@/Components/ResponsiveNavLink.svelte';
+    import Sidebar from '@/Components/Sidebar.svelte';
 
     let { children }: { children: Snippet } = $props();
 
@@ -14,7 +15,10 @@
 </script>
 
 <div class="wrapper">
-    <div class="bg-gray-100 dark:bg-gray-900 min-h-screen">
+    <div class="side-bar">
+        <Sidebar isOpen={true} />
+    </div>
+    <div class="overflow-auto bg-gray-100 dark:bg-gray-900 min-h-screen">
         <nav class="border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800 border-b">
             <!-- Primary Navigation Menu -->
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -140,6 +144,22 @@
 </div>
 
 <style lang="scss">
+    .wrapper {
+        height: 100svh;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: max-content 1fr;
+    }
+    @media (min-width: 780px) {
+        .side-bar {
+            margin-bottom: 0;
+        }
+        .wrapper {
+            grid-template-columns: max-content 1fr;
+            grid-template-rows: 1fr;
+            grid-template-areas: 'side-bar content';
+        }
+    }
     .line {
         position: absolute;
         top: 10rem;

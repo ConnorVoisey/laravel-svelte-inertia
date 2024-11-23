@@ -38,3 +38,8 @@ Optional things:
  - [ ] Admin section
  - [ ] rbac
  - [ ] Breadcrumbs
+
+Look into:
+
+ - [ ] swoole
+ - [ ] otel

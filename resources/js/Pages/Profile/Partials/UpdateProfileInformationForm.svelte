@@ -24,71 +24,55 @@
     }
 </script>
 
-<section>
+<form onsubmit={submit} class="flex flex-col gap-4">
     <header>
-        <h2 class="text-gray-900 dark:text-gray-100 text-lg font-medium">Profile Information</h2>
-
-        <p class="text-gray-600 dark:text-gray-400 mt-1 text-sm">
-            Update your account's profile information and email address.
-        </p>
+        <h2 class="subtitle">Profile Information</h2>
+        <p>Update your account's profile information and email address.</p>
     </header>
+    <Input
+        label="Name"
+        type="text"
+        bind:value={$form.name}
+        required
+        autofocus
+        autocomplete="name"
+        error={$form.errors.name}
+    />
+    <Input
+        label="Email"
+        type="email"
+        bind:value={$form.email}
+        required
+        autocomplete="username"
+        error={$form.errors.email}
+    />
 
-    <form onsubmit={submit} class="mt-6 space-y-6">
-        <div>
-            <Input
-                label="Name"
-                type="text"
-                class="mt-1 block w-full"
-                bind:value={$form.name}
-                required
-                autofocus
-                autocomplete="name"
-                error={$form.errors.name}
-            />
-        </div>
+    {#if mustVerifyEmail && user.email_verified_at === null}
+        <p class="text-gray-800 dark:text-gray-200 mt-2 text-sm">
+            Your email address is unverified.
+            <button use:inertia={{ href: route('verification.send'), method: 'post' }} class="btn-primary">
+                Click here to re-send the verification email.
+            </button>
+        </p>
 
-        <div>
-            <Input
-                label="Email"
-                type="email"
-                class="mt-1 block w-full"
-                bind:value={$form.email}
-                required
-                autocomplete="username"
-                error={$form.errors.email}
-            />
-        </div>
-
-        {#if mustVerifyEmail && user.email_verified_at === null}
-            <p class="text-gray-800 dark:text-gray-200 mt-2 text-sm">
-                Your email address is unverified.
-                <button
-                    use:inertia={{ href: route('verification.send'), method: 'post' }}
-                    class="text-gray-600 hover:text-gray-900 focus:ring-indigo-500 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800 rounded-md text-sm underline focus:outline-none focus:ring-2 focus:ring-offset-2"
-                >
-                    Click here to re-send the verification email.
-                </button>
-            </p>
-
-            {#if status === 'verification-link-sent'}
-                <div class="text-green-600 dark:text-green-400 mt-2 text-sm font-medium">
-                    A new verification link has been sent to your email address.
-                </div>
-            {/if}
+        {#if status === 'verification-link-sent'}
+            <div class="text-green-600 dark:text-green-400 mt-2 text-sm font-medium">
+                A new verification link has been sent to your email address.
+            </div>
         {/if}
+    {/if}
 
-        <div class="flex items-center gap-4">
-            <button disabled={$form.processing}>Save</button>
+    <div class="flex items-center gap-4">
+        <button disabled={$form.processing} class="btn-primary">Save</button>
 
-            <Transition
-                show={$form.recentlySuccessful}
-                enter="transition ease-in-out"
-                enterFrom="opacity-0"
-                leave="transition ease-in-out"
-                leaveFrom="opacity-0"
-            >
-                <p class="text-gray-600 dark:text-gray-400 text-sm transition ease-in-out">Saved.</p>
-            </Transition>
-        </div>
-    </form>
-</section>
+        <Transition
+            show={$form.recentlySuccessful}
+            enter="transition ease-in-out"
+            enterFrom="opacity-0"
+            leave="transition ease-in-out"
+            leaveFrom="opacity-0"
+        >
+            <p class="text-success-5 transition ease-in-out">Saved.</p>
+        </Transition>
+    </div>
+</form>

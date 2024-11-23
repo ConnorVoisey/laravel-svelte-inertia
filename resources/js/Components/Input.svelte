@@ -2,6 +2,7 @@
     import { onMount } from 'svelte';
     import type { HTMLInputAttributes } from 'svelte/elements';
     import { uuidv7 } from 'uuidv7';
+    import autoAnimate from '@formkit/auto-animate';
 
     let {
         id = uuidv7(),
@@ -30,7 +31,7 @@
     });
 </script>
 
-<div class="flex flex-col">
+<div class="flex flex-col" use:autoAnimate>
     {#if label}
         <label for={id} class="label">{label}</label>
     {/if}

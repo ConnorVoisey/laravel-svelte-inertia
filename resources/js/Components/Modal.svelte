@@ -52,7 +52,7 @@
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <Portal target="body">
     <Transition {show} leave="duration-200">
-        <div class="fixed inset-0 z-50 overflow-y-auto px-4 py-6 sm:px-0" scroll-region>
+        <div class="fixed inset-0 z-50 overflow-y-auto bg-[#00000040] px-4 py-6 backdrop-blur-sm sm:px-0" scroll-region>
             <Transition
                 enter="ease-out duration-300"
                 enterFrom="opacity-0"
@@ -76,7 +76,7 @@
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
                 <div
-                    class="bg-white dark:bg-gray-800 mb-6 transform overflow-hidden rounded-lg shadow-xl transition-all sm:mx-auto sm:w-full {maxWidthClass}"
+                    class="transform overflow-hidden rounded-lg bg-surface-1 shadow-xl transition-all sm:mx-auto sm:w-full {maxWidthClass}"
                 >
                     {@render children()}
                 </div>

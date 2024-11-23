@@ -1,6 +1,7 @@
 <script lang="ts">
-    import { router } from '@inertiajs/svelte';
+    import { inertia, router } from '@inertiajs/svelte';
     import type { Component } from 'svelte';
+    import ThemeSelector from './ThemeSelector.svelte';
     let { user = $bindable(), isOpen }: { user: { id: number } | null; isOpen: boolean } = $props();
 
     router.on('navigate', () => {
@@ -13,12 +14,31 @@
             icon: null,
             label: 'Home',
         },
+        {
+            href: '/dashboard',
+            icon: null,
+            label: 'Dashboard',
+        },
+        {
+            href: '/patient',
+            icon: null,
+            label: 'Patient',
+        },
+        {
+            href: '/profile',
+            icon: null,
+            label: 'Profile',
+        },
     ];
+
+    const isLinkActive = (pageId: string) => {
+        return false;
+    };
 </script>
 
 <div class="aside-wrapper">
     <aside>
-        <a href="/" class="logo-img"><img src="https://picsum.photos/300/200" alt="Logo" /></a>
+        <a href="/" class="logo-img"><img src="https://picsum.photos/200/50" alt="Logo" /></a>
         <input type="checkbox" id="hamburger-toggle" aria-hidden="true" bind:checked={isOpen} />
         <label for="hamburger-toggle" class="menu" aria-hidden="true">
             <svg class="open-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
@@ -33,20 +53,23 @@
         <nav>
             <ul>
                 {#each links as link}
+                    {@const Icon = link.icon}
                     <li>
-                        <a href={link.href} class:active={$page.route.id?.includes(link.basePageId)}
-                            ><svelte:component this={link.icon} /><span>{link.label}</span></a
+                        <a
+                            href={link.href}
+                            use:inertia={{ prefetch: true, cacheFor: 3000 }}
+                            class:active={isLinkActive(link.href)}><Icon /><span>{link.label}</span></a
                         >
                     </li>
                 {/each}
-                <li>
-                    <button class="btn" on:click={logout}>Logout</button>
-                </li>
             </ul>
             <hr />
             <ul class="additional">
                 <li>
-                    <ThemeSelector bind:isDarkTheme />
+                    <ThemeSelector />
+                </li>
+                <li>
+                    <button class="btn" onclick={() => router.post('logout')}>Log Out</button>
                 </li>
             </ul>
         </nav>
@@ -62,12 +85,11 @@
         color: on-surface(1);
         display: flex;
         justify-content: space-between;
-        padding: size(4);
+        padding: size(2) size(4);
         position: relative;
     }
     .logo-img {
         max-width: 13rem;
-        padding: size(2) 0;
         border-bottom: solid 2px primary(5);
     }
     .menu {
@@ -89,10 +111,10 @@
         height: 100vh;
         display: flex;
         flex-direction: column;
-        gap: size(8);
+        gap: size(4);
         opacity: 0;
         transition: opacity 200ms;
-        padding: size(8) size(4);
+        padding: size(4) size(4);
         backdrop-filter: blur(0.6em);
         pointer-events: none;
         background-color: surface(0, 0.8);
@@ -142,6 +164,9 @@
     .close-btn {
         display: none;
     }
+    #hamburger-toggle {
+        display: none;
+    }
     #hamburger-toggle:checked {
         & ~ nav {
             opacity: 1;
@@ -167,6 +192,7 @@
             display: flex;
             flex-direction: column;
             gap: size(4);
+            padding: size(4);
         }
         label[for='hamburger-toggle'] {
             display: none;
@@ -180,6 +206,7 @@
             justify-content: space-between;
             padding: 0;
             background-color: transparent;
+            backdrop-filter: none;
         }
     }
     //--end region desktop
