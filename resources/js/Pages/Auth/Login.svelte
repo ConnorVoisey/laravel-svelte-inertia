@@ -60,30 +60,13 @@
         error={$form.errors.password}
     />
 
-    <div class="block">
-        <label class="flex items-center">
-            <Checkbox name="remember" bind:checked={$form.remember} />
-            <span class="text-gray-600 dark:text-gray-400 ms-2 text-sm">Remember me</span>
-        </label>
-    </div>
+    <Checkbox label="Remeber me" bind:checked={$form.remember} />
 
-    <div class="mt-4 flex items-center justify-between">
-        <a
-            href="/register"
-            use:inertia
-            class="text-gray-600 hover:text-gray-900 focus:ring-indigo-500 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800 rounded-md text-sm underline focus:outline-none focus:ring-2 focus:ring-offset-2"
-            >Register</a
-        >
+    <div class="flex items-center justify-between gap-4">
+        <a href="/register" use:inertia={{ prefetch: true }} class="link">Register</a>
         {#if canResetPassword}
-            <a
-                use:inertia
-                href={route('password.request')}
-                class="text-gray-600 hover:text-gray-900 focus:ring-indigo-500 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800 rounded-md text-sm underline focus:outline-none focus:ring-2 focus:ring-offset-2"
-            >
-                Forgot your password?
-            </a>
+            <a use:inertia={{ prefetch: true }} href={route('password.request')} class="link"> Forgot your password? </a>
         {/if}
-
-        <button class="ms-4 {$form.processing && 'opacity-25'}" disabled={$form.processing}>Log in</button>
     </div>
+    <button class="btn-primary {$form.processing && 'opacity-25'}" disabled={$form.processing}>Log in</button>
 </form>

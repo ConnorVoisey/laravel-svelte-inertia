@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { inertia } from '@inertiajs/svelte';
 </script>
 
 <svelte:head>
@@ -12,3 +13,5 @@
         </div>
     </div>
 </div>
+
+<a href="/patient" class="link" use:inertia={{ prefetch: true, cacheFor: 3000 }}>Patient</a>

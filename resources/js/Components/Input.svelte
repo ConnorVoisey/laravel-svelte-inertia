@@ -7,7 +7,6 @@
         id = uuidv7(),
         name = id,
         label,
-        class: className,
         value = $bindable(),
         error,
         ...attrs
@@ -31,21 +30,27 @@
     });
 </script>
 
-<div>
+<div class="flex flex-col">
     {#if label}
-        <label for={id} class="text-sm font-medium text-on-surface-1 {className}">{label}</label>
+        <label for={id} class="label">{label}</label>
     {/if}
     <input
         {id}
         {name}
         {...attrs}
-        class="rounded-md border-on-surface-2 bg-surface-1 shadow-sm focus:border-primary-5 focus:ring-primary-5 {className}"
+        class="rounded-md border-on-surface-2 bg-surface-0 shadow-sm focus:border-primary-5 focus:ring-primary-5"
         bind:value
         bind:this={input}
     />
     {#if error}
-        <p class="text-sm text-error-5">
+        <p class="error-text">
             {error}
         </p>
     {/if}
 </div>
+
+<style lang="scss">
+    input {
+        transition: border 200ms;
+    }
+</style>

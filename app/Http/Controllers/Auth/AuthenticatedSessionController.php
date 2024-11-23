@@ -29,6 +29,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+sleep(4);
         $request->authenticate();
 
         $request->session()->regenerate();

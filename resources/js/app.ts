@@ -15,6 +15,7 @@ defineRoutes(routes);
 const layoutMap = {
     'Auth/Login': LoginLayout,
     'Auth/Register': LoginLayout,
+    'Auth/ForgotPassword': LoginLayout,
     Welcome: GuestLayout,
 };
 
@@ -31,11 +32,15 @@ createInertiaApp({
             layout,
         };
     },
-    setup({ el, App }) {
+    setup({ el, App, props }) {
         if (el.dataset.serverRendered === 'true') {
-            hydrate(App, { target: el });
+            hydrate(App, { target: el, props });
         } else {
-            mount(App, { target: el });
+            mount(App, { target: el, props });
         }
     },
+    progress: {
+        color: 'hsl(var(--clr-primary-5))',
+        showSpinner: true,
+    }
 });

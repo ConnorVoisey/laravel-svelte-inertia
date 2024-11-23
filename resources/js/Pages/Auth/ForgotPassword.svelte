@@ -1,8 +1,8 @@
 <script lang="ts">
-    import GuestLayout from '@/Layouts/GuestLayout.svelte';
+    import autoAnimate from '@formkit/auto-animate';
     import Input from '@/Components/Input.svelte';
     import { route } from 'momentum-trail';
-    import { useForm } from '@inertiajs/svelte';
+    import { useForm, inertia } from '@inertiajs/svelte';
 
     let { status }: { status?: string } = $props();
 
@@ -21,36 +21,31 @@
     <title>Forgot Password</title>
 </svelte:head>
 
-<GuestLayout>
-    <div class="text-gray-600 dark:text-gray-400 mb-4 text-sm">
+<form onsubmit={submit} class="flex flex-col gap-4" use:autoAnimate>
+    <h1 class="title">Forgot Password</h1>
+    <p class="text-sm text-on-surface-0">
         Forgot your password? No problem. Just let us know your email address and we will email you a password reset
         link that will allow you to choose a new one.
-    </div>
+    </p>
 
     {#if status}
-        <div class="text-green-600 dark:text-green-400 mb-4 text-sm font-medium">
+        <div class="text-sm font-medium text-success-5">
             {status}
         </div>
     {/if}
 
-    <form onsubmit={submit}>
-        <div>
-            <Input
-                label="Email"
-                type="email"
-                class="mt-1 block w-full"
-                bind:value={$form.email}
-                required
-                autofocus
-                autocomplete="username"
-                error={$form.errors.email}
-            />
-        </div>
+    <div>
+        <Input
+            label="Email"
+            type="email"
+            class="mt-1 block w-full"
+            bind:value={$form.email}
+            required
+            autofocus
+            autocomplete="username"
+            error={$form.errors.email}
+        />
+    </div>
 
-        <div class="mt-4 flex items-center justify-end">
-            <button class={$form.processing && 'opacity-25'} disabled={$form.processing}>
-                Email Password Reset Link
-            </button>
-        </div>
-    </form>
-</GuestLayout>
+    <button class="btn-primary" disabled={$form.processing}> Email Password Reset Link </button>
+</form>
