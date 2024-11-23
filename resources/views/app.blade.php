@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" theme="dark">
+
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" theme="{{Cookie::get('theme') ?? 'dark'}}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">

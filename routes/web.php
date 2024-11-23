@@ -3,6 +3,7 @@
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -14,6 +15,17 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+Route::post('/setTheme', function (Request $request) {
+    $validated = $request->validate([
+        'theme' => ['string', 'required'],
+    ]);
+    return response(null)
+        ->cookie(
+            'theme',
+            $validated['theme'],
+            time() + (10 * 365 * 24 * 60 * 60)
+        );
+})->name('theme');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

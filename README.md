@@ -28,7 +28,8 @@ Things left todo:
  - [ ] SVGs, maybe this should use a different library
  - [ ] Cookies options
  - [ ] Modals
- - [ ] Theme selector
+ - [x] Theme selector
+ - [ ] Make prefetching useable
 
 Optional things:
 

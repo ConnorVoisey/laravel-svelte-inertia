@@ -1,5 +1,6 @@
 <script lang="ts">
     import Loading from '@/Components/Loading.svelte';
+    import ThemeSelector from '@/Components/ThemeSelector.svelte';
     import type { Snippet } from 'svelte';
     import { router } from '@inertiajs/svelte';
 
@@ -18,6 +19,7 @@
 </script>
 
 <div class="grid h-svh items-center justify-center bg-surface-0">
+    <ThemeSelector />
     {#if isLoading}
         <Loading />
     {/if}
