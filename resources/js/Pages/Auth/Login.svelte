@@ -65,7 +65,9 @@
     <div class="flex items-center justify-between gap-4">
         <a href="/register" use:inertia={{ prefetch: true }} class="link">Register</a>
         {#if canResetPassword}
-            <a use:inertia={{ prefetch: true }} href={route('password.request')} class="link"> Forgot your password? </a>
+            <a use:inertia={{ prefetch: true }} href={route('password.request')} class="link">
+                Forgot your password?
+            </a>
         {/if}
     </div>
     <button class="btn-primary {$form.processing && 'opacity-25'}" disabled={$form.processing}>Log in</button>

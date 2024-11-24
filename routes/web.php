@@ -2,16 +2,15 @@
 
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
 
 Route::post('/setTheme', function (Request $request) {
     $validated = $request->validate([
         'theme' => ['string', 'required'],
     ]);
+
     return response(null)
         ->cookie(
             'theme',
@@ -21,9 +20,9 @@ Route::post('/setTheme', function (Request $request) {
 })->name('theme');
 
 Route::middleware('auth')->group(function () {
-Route::get('/', function () {
-    return Inertia::render('Dashboard');
-})->name('dashboard');
+    Route::get('/', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -31,5 +30,4 @@ Route::get('/', function () {
     Route::resource('/patient', PatientController::class);
 });
 
-require __DIR__ . '/auth.php';
-
+require __DIR__.'/auth.php';

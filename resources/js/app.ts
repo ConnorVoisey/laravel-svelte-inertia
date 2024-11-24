@@ -42,5 +42,5 @@ createInertiaApp({
     progress: {
         color: 'hsl(var(--clr-primary-5))',
         showSpinner: true,
-    }
+    },
 });
