@@ -16,17 +16,17 @@
     <title>Profile</title>
 </svelte:head>
 
-<div class="py-12">
-    <div class="mx-auto max-w-7xl space-y-6 sm:px-6 lg:px-8">
-        <div class="bg-white dark:bg-gray-800 p-4 shadow sm:rounded-lg sm:p-8">
+<div class="py-8">
+    <div class="mx-auto max-w-7xl space-y-8 sm:px-6 lg:px-8">
+        <div class="card">
             <UpdateProfileInformationForm {mustVerifyEmail} {status} />
         </div>
 
-        <div class="bg-white dark:bg-gray-800 p-4 shadow sm:rounded-lg sm:p-8">
+        <div class="card">
             <UpdatePasswordForm />
         </div>
 
-        <div class="bg-white dark:bg-gray-800 p-4 shadow sm:rounded-lg sm:p-8">
+        <div class="card">
             <DeleteUserForm />
         </div>
     </div>

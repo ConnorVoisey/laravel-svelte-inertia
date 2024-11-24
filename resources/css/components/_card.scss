@@ -2,12 +2,13 @@
 $colors: 'primary', 'secondary', 'success', 'warning', 'error';
 
 :root {
+
     .card,
     .card-lg {
         height: max-content;
         padding: size(4);
-        border-radius: size(1);
-        box-shadow: 0.1rem 0.1rem 0.4rem 0.05rem #4b556388;
+        border-radius: size(4);
+        background-color: surface(1);
 
         .card {
             background-color: surface(0);

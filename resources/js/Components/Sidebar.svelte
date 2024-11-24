@@ -1,44 +1,42 @@
 <script lang="ts">
-    import { inertia, router } from '@inertiajs/svelte';
+    import { inertia, router, page } from '@inertiajs/svelte';
     import type { Component } from 'svelte';
     import ThemeSelector from './ThemeSelector.svelte';
-    let { user = $bindable(), isOpen }: { user: { id: number } | null; isOpen: boolean } = $props();
+    import { route } from '../../../vendor/tightenco/ziggy/src/js';
+    import IconHome from '~icons/carbon/home';
+    import IconHospitalBed from '~icons/carbon/hospitalBed';
+    import IconUser from '~icons/carbon/user';
 
-    router.on('navigate', () => {
-        isOpen = false;
-    });
+    let { isOpen }: { user: { id: number } | null; isOpen: boolean } = $props();
 
-    const links: { href: string; label: string; icon: Component }[] = [
+    type Link = { href: string; label: string; icon: Component; isActive: () => boolean };
+    const links: Link[] = [
         {
             href: '/',
-            icon: null,
+            icon: IconHome,
             label: 'Home',
-        },
-        {
-            href: '/dashboard',
-            icon: null,
-            label: 'Dashboard',
+            isActive: () => $page.url === '/',
         },
         {
             href: '/patient',
-            icon: null,
+            icon: IconHospitalBed,
             label: 'Patient',
-        },
-        {
-            href: '/profile',
-            icon: null,
-            label: 'Profile',
+            isActive: () => $page.url.toLowerCase().startsWith('/patient'),
         },
     ];
-
-    const isLinkActive = (pageId: string) => {
-        return false;
-    };
 </script>
 
+{#snippet icon(link: Link)}
+    <a href={link.href} use:inertia={{ prefetch: true, cacheFor: 3000 }} class:active={link.isActive()}>
+        <link.icon width="100%" height="100%" />
+        <span>{link.label}</span>
+    </a>
+{/snippet}
 <div class="aside-wrapper">
     <aside>
-        <a href="/" class="logo-img"><img src="https://picsum.photos/200/50" alt="Logo" /></a>
+        <a href="/" class="logo-img"
+            ><img src="https://picsum.photos/200/50" alt="Logo" class="w-[200px] rounded-lg" /></a
+        >
         <input type="checkbox" id="hamburger-toggle" aria-hidden="true" bind:checked={isOpen} />
         <label for="hamburger-toggle" class="menu" aria-hidden="true">
             <svg class="open-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
@@ -53,13 +51,8 @@
         <nav>
             <ul>
                 {#each links as link}
-                    {@const Icon = link.icon}
                     <li>
-                        <a
-                            href={link.href}
-                            use:inertia={{ prefetch: true, cacheFor: 3000 }}
-                            class:active={isLinkActive(link.href)}><Icon /><span>{link.label}</span></a
-                        >
+                        {@render icon(link)}
                     </li>
                 {/each}
             </ul>
@@ -68,9 +61,18 @@
                 <li>
                     <ThemeSelector />
                 </li>
-                <li>
+                {#if $page.props.auth.user === null}
+                    <a href={route('login')}>Log In</a>
+                {:else}
+                    <p>{$page.props.auth.user.name}</p>
+                    {@render icon({
+                        href: '/profile',
+                        label: 'Profile',
+                        icon: IconUser,
+                        isActive: () => $page.url.toLowerCase().startsWith('/profile'),
+                    })}
                     <button class="btn" onclick={() => router.post('logout')}>Log Out</button>
-                </li>
+                {/if}
             </ul>
         </nav>
     </aside>
@@ -90,7 +92,6 @@
     }
     .logo-img {
         max-width: 13rem;
-        border-bottom: solid 2px primary(5);
     }
     .menu {
         svg {
