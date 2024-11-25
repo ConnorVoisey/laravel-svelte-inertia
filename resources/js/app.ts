@@ -24,8 +24,8 @@ export const resolve = async (name: string) => {
         `./Pages/${name}.svelte`,
         import.meta.glob<ResolvedComponent>('./Pages/**/*.svelte'),
     );
-    // const layout = layoutMap[name as keyof typeof layoutMap] ?? AuthenticatedLayout;
-    const layout = null;
+    const layout = layoutMap[name as keyof typeof layoutMap] ?? AuthenticatedLayout;
+    // const layout = null;
     console.log({ page, name, layout });
     return {
         default: page.default,

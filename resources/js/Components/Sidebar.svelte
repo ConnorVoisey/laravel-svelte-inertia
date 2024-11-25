@@ -61,7 +61,7 @@
                 <li>
                     <ThemeSelector />
                 </li>
-                {#if $page.props.auth.user === null}
+                {#if $page.props.auth?.user == null}
                     <a href={route('login')}>Log In</a>
                 {:else}
                     <p>{$page.props.auth.user.name}</p>
