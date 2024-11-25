@@ -6,10 +6,13 @@
     import IconHome from '~icons/carbon/home';
     import IconHospitalBed from '~icons/carbon/hospitalBed';
     import IconUser from '~icons/carbon/user';
+    import IconLogout from '~icons/carbon/logout';
+    import IconParentChild from '~icons/carbon/parentChild';
+    import IconDemo from '~icons/carbon/demo';
 
     let { isOpen }: { user: { id: number } | null; isOpen: boolean } = $props();
 
-    type Link = { href: string; label: string; icon: Component; isActive: () => boolean };
+    type Link = { href: string; label: string; icon: Component; isActive: () => boolean; method?: 'post' | 'get' };
     const links: Link[] = [
         {
             href: '/',
@@ -20,14 +23,38 @@
         {
             href: '/patient',
             icon: IconHospitalBed,
-            label: 'Patient',
+            label: 'Patients',
             isActive: () => $page.url.toLowerCase().startsWith('/patient'),
+        },
+        {
+            href: '/demo',
+            icon: IconDemo,
+            label: 'Demo',
+            isActive: () => $page.url.toLowerCase().startsWith('/demo'),
+        },
+    ];
+    const adminLinks: Link[] = [
+        {
+            href: '/admin/users',
+            icon: IconUser,
+            label: 'Users',
+            isActive: () => $page.url.toLowerCase().startsWith('/admin/users'),
+        },
+        {
+            href: '/admin/roles',
+            icon: IconParentChild,
+            label: 'Roles',
+            isActive: () => $page.url.toLowerCase().startsWith('/admin/roles'),
         },
     ];
 </script>
 
-{#snippet icon(link: Link)}
-    <a href={link.href} use:inertia={{ prefetch: true, cacheFor: 3000 }} class:active={link.isActive()}>
+{#snippet linkWithIcon(link: Link)}
+    <a
+        href={link.href}
+        use:inertia={{ prefetch: (link.method ?? 'get') === 'get', cacheFor: 3000, method: link.method ?? 'get' }}
+        class:active={link.isActive()}
+    >
         <link.icon width="100%" height="100%" />
         <span>{link.label}</span>
     </a>
@@ -52,27 +79,46 @@
             <ul>
                 {#each links as link}
                     <li>
-                        {@render icon(link)}
+                        {@render linkWithIcon(link)}
                     </li>
                 {/each}
             </ul>
             <hr />
             <ul class="additional">
                 <li>
+                    <h4 class="subtitle">Admin</h4>
+                </li>
+                {#each adminLinks as link}
+                    <li>
+                        {@render linkWithIcon(link)}
+                    </li>
+                {/each}
+            </ul>
+            <hr />
+            <ul class="additional">
+                <li class="flex items-end gap-4 justify-between">
+                    <h4 class="subtitle">You</h4>
                     <ThemeSelector />
                 </li>
                 {#if $page.props.auth?.user == null}
                     <a href={route('login')}>Log In</a>
                 {:else}
-                    <p>{$page.props.auth.user.name}</p>
-                    {@render icon({
+                    {@render linkWithIcon({
                         href: '/profile',
                         label: 'Profile',
                         icon: IconUser,
                         isActive: () => $page.url.toLowerCase().startsWith('/profile'),
                     })}
-                    <button class="btn" onclick={() => router.post('logout')}>Log Out</button>
+                    {@render linkWithIcon({
+                        href: '/logout',
+                        label: 'Logout',
+                        icon: IconLogout,
+                        isActive: () => false,
+                        method: 'post',
+                    })}
                 {/if}
+                <li>
+                </li>
             </ul>
         </nav>
     </aside>
@@ -146,14 +192,14 @@
             height: 2px;
             width: 0;
             transition: width 200ms;
-            bottom: 0;
+            bottom: size(-1);
         }
         &:hover::after,
         &:focus::after {
             width: 100%;
         }
         :global(svg) {
-            width: size(7);
+            width: size(6);
             fill: on-surface(1);
             transition: fill 200ms;
         }
@@ -193,7 +239,7 @@
             display: flex;
             flex-direction: column;
             gap: size(4);
-            padding: size(4);
+            padding: 0;
         }
         label[for='hamburger-toggle'] {
             display: none;
@@ -208,6 +254,9 @@
             padding: 0;
             background-color: transparent;
             backdrop-filter: none;
+            ul {
+                padding: 0 size(4);
+            }
         }
     }
     //--end region desktop
