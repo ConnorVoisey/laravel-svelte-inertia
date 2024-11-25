@@ -26,6 +26,7 @@ Route::get('/json', function (Request $request) {
             'user'     => $request->user(),
             'patients' => Patient::limit(5)->get(),
             'ip'       => $request->ip(), // TODO: replace this with something that checks the headers for
+            'app_name' => env('APP_NAME'),
         ]);
 })->name('json');
 
