@@ -1,5 +1,4 @@
 <script lang="ts">
-    import GuestLayout from '@/Layouts/GuestLayout.svelte';
     import Input from '@/Components/Input.svelte';
     import { inertia, useForm } from '@inertiajs/svelte';
     import { route } from 'momentum-trail';

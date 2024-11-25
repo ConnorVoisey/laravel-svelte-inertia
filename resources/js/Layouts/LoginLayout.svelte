@@ -25,7 +25,7 @@
     {/if}
     <!-- Page Content -->
     <main class="rounded-2xl bg-surface-2 p-8">
-        {@render children()}
+        {@render children?.()}
     </main>
 </div>
 

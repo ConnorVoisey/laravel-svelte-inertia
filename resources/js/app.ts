@@ -19,19 +19,21 @@ const layoutMap = {
     Welcome: GuestLayout,
 };
 
+export const resolve = async (name: string) => {
+    const page = await resolvePageComponent(
+        `./Pages/${name}.svelte`,
+        import.meta.glob<ResolvedComponent>('./Pages/**/*.svelte'),
+    );
+    // const layout = layoutMap[name as keyof typeof layoutMap] ?? AuthenticatedLayout;
+    const layout = null;
+    console.log({ page, name, layout });
+    return {
+        default: page.default,
+        layout,
+    };
+};
 createInertiaApp({
-    resolve: async (name) => {
-        const page = await resolvePageComponent(
-            `./Pages/${name}.svelte`,
-            import.meta.glob<ResolvedComponent>('./Pages/**/*.svelte'),
-        );
-        console.log({ page, name });
-        const layout = layoutMap[name as keyof typeof layoutMap] ?? AuthenticatedLayout;
-        return {
-            default: page.default,
-            layout,
-        };
-    },
+    resolve,
     setup({ el, App, props }) {
         if (el.dataset.serverRendered === 'true') {
             hydrate(App, { target: el, props });

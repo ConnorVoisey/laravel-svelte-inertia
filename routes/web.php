@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -18,6 +19,15 @@ Route::post('/setTheme', function (Request $request) {
             time() + (10 * 365 * 24 * 60 * 60)
         );
 })->name('theme');
+
+Route::get('/json', function (Request $request) {
+    return response()
+        ->json([
+            'user'     => $request->user(),
+            'patients' => Patient::limit(5)->get(),
+            'ip'       => $request->ip(), // TODO: replace this with something that checks the headers for
+        ]);
+})->name('json');
 
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {
