@@ -96,7 +96,7 @@
             </ul>
             <hr />
             <ul class="additional">
-                <li class="flex items-end gap-4 justify-between">
+                <li class="flex items-end justify-between gap-4">
                     <h4 class="subtitle">You</h4>
                     <ThemeSelector />
                 </li>
@@ -117,8 +117,7 @@
                         method: 'post',
                     })}
                 {/if}
-                <li>
-                </li>
+                <li></li>
             </ul>
         </nav>
     </aside>

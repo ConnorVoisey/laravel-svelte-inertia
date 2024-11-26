@@ -11,7 +11,8 @@
         "format": "concurrently -c '#93c5fd,#c4b5fd' 'npm run format:js' 'composer run format' --names=js,php",
         "test:integration": "playwright test",
         "test:unit": "vitest",
-        "everything": "concurrently  -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" --raw \"npm run dev\" \"watchexec -e .php -r 'php artisan horizon'\" 'tail -f storage/logs/laravel.log | jq' --names=vite,horizon,logs"
+        "everything": "concurrently  -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" --raw \"npm run dev\" \"watchexec -e .php -r 'php artisan horizon'\" 'tail -f storage/logs/laravel.log | jq' --names=vite,horizon,logs",
+        "db:types": "kanel"
     },
     "devDependencies": {
         "@iconify/json": "^2.2.275",
