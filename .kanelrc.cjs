@@ -11,6 +11,7 @@ module.exports = {
     outputPath: './resources/js/schemas',
 
     customTypeMap: {
+        'pg_catalog.int64': 'number',
         'pg_catalog.tsvector': 'string',
         'pg_catalog.bpchar': 'string',
     },

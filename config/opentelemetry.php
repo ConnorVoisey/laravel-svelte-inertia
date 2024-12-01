@@ -90,40 +90,40 @@ return [
             'protocol' => env('OTEL_EXPORTER_OTLP_PROTOCOL', 'http/protobuf'),
         ],
 
-        'zipkin' => [
-            'driver'   => 'zipkin',
-            'endpoint' => env('OTEL_EXPORTER_ZIPKIN_ENDPOINT', 'http://localhost:9411'),
-        ],
+        // 'zipkin' => [
+        //     'driver'   => 'zipkin',
+        //     'endpoint' => env('OTEL_EXPORTER_ZIPKIN_ENDPOINT', 'http://localhost:9411'),
+        // ],
     ],
 
     /**
      * List of instrumentation used for application tracing
      */
     'instrumentation' => [
-        Instrumentation\HttpServerInstrumentation::class => [
-            'enabled'           => env('OTEL_INSTRUMENTATION_HTTP_SERVER', true),
-            'excluded_paths'    => [],
-            'allowed_headers'   => [],
-            'sensitive_headers' => [],
-        ],
-
-        Instrumentation\HttpClientInstrumentation::class => [
-            'enabled'           => env('OTEL_INSTRUMENTATION_HTTP_CLIENT', true),
-            'allowed_headers'   => [],
-            'sensitive_headers' => [],
-        ],
-
-        Instrumentation\QueryInstrumentation::class => env('OTEL_INSTRUMENTATION_QUERY', true),
-
-        Instrumentation\RedisInstrumentation::class => env('OTEL_INSTRUMENTATION_REDIS', true),
-
-        Instrumentation\QueueInstrumentation::class => env('OTEL_INSTRUMENTATION_QUEUE', true),
-
-        Instrumentation\CacheInstrumentation::class => env('OTEL_INSTRUMENTATION_CACHE', true),
-
-        Instrumentation\EventInstrumentation::class => [
-            'enabled' => env('OTEL_INSTRUMENTATION_EVENT', true),
-            'ignored' => [],
-        ],
+        // Instrumentation\HttpServerInstrumentation::class => [
+        //     'enabled'           => env('OTEL_INSTRUMENTATION_HTTP_SERVER', true),
+        //     'excluded_paths'    => [],
+        //     'allowed_headers'   => [],
+        //     'sensitive_headers' => [],
+        // ],
+        //
+        // Instrumentation\HttpClientInstrumentation::class => [
+        //     'enabled'           => env('OTEL_INSTRUMENTATION_HTTP_CLIENT', true),
+        //     'allowed_headers'   => [],
+        //     'sensitive_headers' => [],
+        // ],
+        //
+        // Instrumentation\QueryInstrumentation::class => env('OTEL_INSTRUMENTATION_QUERY', true),
+        //
+        // Instrumentation\RedisInstrumentation::class => env('OTEL_INSTRUMENTATION_REDIS', true),
+        //
+        // Instrumentation\QueueInstrumentation::class => env('OTEL_INSTRUMENTATION_QUEUE', true),
+        //
+        // Instrumentation\CacheInstrumentation::class => env('OTEL_INSTRUMENTATION_CACHE', true),
+        //
+        // Instrumentation\EventInstrumentation::class => [
+        //     'enabled' => env('OTEL_INSTRUMENTATION_EVENT', true),
+        //     'ignored' => [],
+        // ],
     ],
 ];

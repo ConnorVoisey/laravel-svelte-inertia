@@ -1,14 +1,14 @@
 <script lang="ts">
     import autoAnimate from '@formkit/auto-animate';
-    import type Role from '../../../schemas/public/Roles';
-    import type Permission from '../../../schemas/public/Permissions';
+    import type { RoleWithPermissions } from '../../../types';
     import UpdateRoleForm from './Partials/UpdateRoleForm.svelte';
     import { inertia } from '@inertiajs/svelte';
     import { route, current } from 'momentum-trail';
     type Props = {
-        roles: Role[];
+        roles: RoleWithPermissions[];
     };
     const { roles }: Props = $props();
+    console.log({ roles });
 </script>
 
 <svelte:head>
@@ -20,9 +20,9 @@
     <ul class="flex flex-col gap-4" use:autoAnimate>
         {#each roles as role}
             <li class="text-on-surface-2">
-                <a class="link" use:inertia={{ prefetch: true, cacheFor: 3000 }} href={route('roles.edit', role)}
-                    >{role.name}</a
-                >
+                <a class="link" use:inertia={{ prefetch: true, cacheFor: 3000 }} href={route('roles.edit', role)}>
+                    <p>{role.name} {role.permissions.length} Permissions</p>
+                </a>
             </li>
         {/each}
     </ul>

@@ -15,7 +15,8 @@ up:
     npm i
     composer i
     php artisan migrate
-    npx concurrently  -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" "npm run dev" "watchexec -e .php -c -r 'php artisan horizon'" "tail -f storage/logs/laravel.log | jq" "php artisan pail" --names=vite,horizon,logs,pail
+    @just clear_cache
+    npm run everything
 
 build:
     npm run build
